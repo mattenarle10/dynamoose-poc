@@ -6,11 +6,11 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "create": "node src/examples/create.js",
-    "read": "node src/examples/read.js",
-    "update": "node src/examples/update.js",
-    "delete": "node src/examples/delete.js",
-    "setup": "node src/setup/createTable.js"
+    "create": "node src/create.js",
+    "read": "node src/read.js",
+    "update": "node src/update.js",
+    "delete": "node src/delete.js",
+    "setup": "node src/setup.js"
   },
   "keywords": [
     "dynamodb",

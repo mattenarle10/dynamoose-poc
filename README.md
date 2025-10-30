@@ -2,13 +2,13 @@
 
 A proof of concept demonstrating CRUD operations with DynamoDB using Dynamoose ODM.
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Node.js (v14 or higher)
 - AWS Account with DynamoDB access
 - AWS credentials configured
 
-## 🚀 Getting Started
+## Getting Started
 
 1. **Clone the repository**
    ```bash
@@ -32,7 +32,7 @@ A proof of concept demonstrating CRUD operations with DynamoDB using Dynamoose O
    npm start
    ```
 
-## 📚 Available Scripts
+## Available Scripts
 
 - `npm start` - Run the main application
 - `npm run dev` - Run with nodemon for development
@@ -42,28 +42,30 @@ A proof of concept demonstrating CRUD operations with DynamoDB using Dynamoose O
 - `npm run delete` - Example: Delete a user
 - `npm run setup` - Create the DynamoDB table
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 dynamoose-poc/
 ├── src/
-│   ├── config/          # Configuration files
-│   ├── models/          # Dynamoose models
-│   ├── services/        # CRUD service layer
-│   ├── examples/        # Usage examples
-│   ├── setup/           # Setup scripts
-│   └── index.js         # Main entry point
-├── .env.example         # Environment variables template
-├── .gitignore
+│   ├── config.js        # DynamoDB configuration
+│   ├── model.js         # User model
+│   ├── service.js       # CRUD operations
+│   ├── index.js         # Main entry
+│   ├── create.js        # Create example
+│   ├── read.js          # Read example
+│   ├── update.js        # Update example
+│   ├── delete.js        # Delete example
+│   └── setup.js         # Setup script
+├── .env.example
 ├── package.json
 └── README.md
 ```
 
-## 🔧 CRUD Operations
+## CRUD Operations
 
 ### Create
 ```javascript
-const user = await UserService.createUser({
+const user = await UserService.create({
   userId: '123',
   email: 'user@example.com',
   name: 'John Doe'
@@ -72,27 +74,27 @@ const user = await UserService.createUser({
 
 ### Read
 ```javascript
-const user = await UserService.getUserById('123');
-const allUsers = await UserService.getAllUsers();
+const user = await UserService.getById('123');
+const allUsers = await UserService.getAll();
 ```
 
 ### Update
 ```javascript
-const updated = await UserService.updateUser('123', {
+const updated = await UserService.update('123', {
   name: 'Jane Doe'
 });
 ```
 
 ### Delete
 ```javascript
-await UserService.deleteUser('123');
+await UserService.delete('123');
 ```
 
-## 🔗 Resources
+## Resources
 
 - [Dynamoose Documentation](https://dynamoosejs.com/)
 - [AWS DynamoDB Documentation](https://docs.aws.amazon.com/dynamodb/)
 
-## 📝 License
+## License
 
 MIT

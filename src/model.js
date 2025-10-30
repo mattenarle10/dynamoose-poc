@@ -1,14 +1,10 @@
 const dynamoose = require('dynamoose');
 
-/**
- * User Schema Definition
- * Defines the structure of the User model in DynamoDB
- */
-const userSchema = new dynamoose.Schema(
+const schema = new dynamoose.Schema(
   {
     userId: {
       type: String,
-      hashKey: true, // Partition key
+      hashKey: true,
       required: true,
     },
     email: {
@@ -32,27 +28,15 @@ const userSchema = new dynamoose.Schema(
       enum: ['active', 'inactive', 'pending'],
       default: 'active',
     },
-    createdAt: {
-      type: Date,
-      default: () => new Date(),
-    },
-    updatedAt: {
-      type: Date,
-      default: () => new Date(),
-    },
   },
   {
-    timestamps: {
-      createdAt: 'createdAt',
-      updatedAt: 'updatedAt',
-    },
+    timestamps: true,
   }
 );
 
-// Create the model
 const User = dynamoose.model(
   process.env.DYNAMODB_TABLE_NAME || 'Users',
-  userSchema
+  schema
 );
 
 module.exports = User;

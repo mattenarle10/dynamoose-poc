@@ -1,64 +1,36 @@
-const configureDynamoDB = require('./config/dynamodb');
-const UserService = require('./services/UserService');
+const configure = require('./config');
+const UserService = require('./service');
 
-/**
- * Main entry point demonstrating CRUD operations
- */
 const main = async () => {
-  try {
-    console.log('🚀 Starting Dynamoose POC...\n');
+  console.log('Starting Dynamoose POC\n');
+  configure();
 
-    // Initialize DynamoDB connection
-    configureDynamoDB();
+  const newUser = await UserService.create({
+    userId: 'user-001',
+    email: 'john@example.com',
+    name: 'John Doe',
+    age: 30,
+    status: 'active',
+  });
+  console.log('Created:', newUser.userId);
 
-    // Example: Create a user
-    console.log('--- CREATE Operation ---');
-    const newUser = await UserService.createUser({
-      userId: 'user-001',
-      email: 'john.doe@example.com',
-      name: 'John Doe',
-      age: 30,
-      status: 'active',
-    });
-    console.log('Created user:', newUser);
-    console.log();
+  const user = await UserService.getById('user-001');
+  console.log('Retrieved:', user.name);
 
-    // Example: Read a user
-    console.log('--- READ Operation ---');
-    const user = await UserService.getUserById('user-001');
-    console.log('Retrieved user:', user);
-    console.log();
+  const updated = await UserService.update('user-001', {
+    name: 'John Updated',
+    age: 31,
+  });
+  console.log('Updated:', updated.name);
 
-    // Example: Update a user
-    console.log('--- UPDATE Operation ---');
-    const updatedUser = await UserService.updateUser('user-001', {
-      name: 'John Updated Doe',
-      age: 31,
-    });
-    console.log('Updated user:', updatedUser);
-    console.log();
+  const allUsers = await UserService.getAll({ limit: 10 });
+  console.log('Total users:', allUsers.length);
 
-    // Example: Get all users
-    console.log('--- LIST Operation ---');
-    const allUsers = await UserService.getAllUsers({ limit: 10 });
-    console.log(`Total users found: ${allUsers.length}`);
-    console.log();
-
-    // Example: Delete a user (commented out to prevent deletion)
-    // console.log('--- DELETE Operation ---');
-    // await UserService.deleteUser('user-001');
-    // console.log('User deleted');
-
-    console.log('✅ All operations completed successfully!');
-  } catch (error) {
-    console.error('❌ Error in main:', error.message);
-    process.exit(1);
-  }
+  console.log('\nComplete');
 };
 
-// Run the main function
 if (require.main === module) {
-  main();
+  main().catch(console.error);
 }
 
 module.exports = { main };
