@@ -1,0 +1,32 @@
+{
+  "name": "dynamoose-poc",
+  "version": "1.0.0",
+  "description": "A proof of concept for DynamoDB with Dynamoose - CRUD operations demo",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "create": "node src/examples/create.js",
+    "read": "node src/examples/read.js",
+    "update": "node src/examples/update.js",
+    "delete": "node src/examples/delete.js",
+    "setup": "node src/setup/createTable.js"
+  },
+  "keywords": [
+    "dynamodb",
+    "dynamoose",
+    "aws",
+    "crud",
+    "poc"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dynamoose": "^3.2.1",
+    "aws-sdk": "^2.1495.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
