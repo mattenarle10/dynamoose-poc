@@ -1,9 +1,9 @@
-const configure = require('../config');
-const UserService = require('../service');
+import { configure } from '../config';
+import { UserService } from '../service';
 
 configure();
 
-const run = async () => {
+const run = async (): Promise<void> => {
   const users = await UserService.getAll({ limit: 20 });
   console.log(`Found ${users.length} users`);
 

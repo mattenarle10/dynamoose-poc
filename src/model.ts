@@ -1,4 +1,14 @@
-const dynamoose = require('dynamoose');
+import * as dynamoose from 'dynamoose';
+
+export interface IUser {
+  userId: string;
+  email: string;
+  name: string;
+  age?: number;
+  status?: 'active' | 'inactive' | 'pending';
+  createdAt?: Date;
+  updatedAt?: Date;
+}
 
 const schema = new dynamoose.Schema(
   {
@@ -34,9 +44,7 @@ const schema = new dynamoose.Schema(
   }
 );
 
-const User = dynamoose.model(
+export const User = dynamoose.model(
   process.env.DYNAMODB_TABLE_NAME || 'Users',
   schema
 );
-
-module.exports = User;

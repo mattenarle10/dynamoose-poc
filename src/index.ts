@@ -1,7 +1,7 @@
-const configure = require('./config');
-const UserService = require('./service');
+import { configure } from './config';
+import { UserService } from './service';
 
-const main = async () => {
+const main = async (): Promise<void> => {
   console.log('Starting Dynamoose POC\n');
   configure();
 
@@ -33,4 +33,4 @@ if (require.main === module) {
   main().catch(console.error);
 }
 
-module.exports = { main };
+export { main };

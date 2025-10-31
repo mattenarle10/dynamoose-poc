@@ -2,15 +2,17 @@
   "name": "dynamoose-poc",
   "version": "1.0.0",
   "description": "A proof of concept for DynamoDB with Dynamoose - CRUD operations demo",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "create": "node src/create.js",
-    "read": "node src/read.js",
-    "update": "node src/update.js",
-    "delete": "node src/delete.js",
-    "setup": "node src/setup.js"
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "create": "ts-node src/controllers/create.ts",
+    "read": "ts-node src/controllers/read.ts",
+    "update": "ts-node src/controllers/update.ts",
+    "delete": "ts-node src/controllers/delete.ts",
+    "setup": "ts-node src/setup.ts",
+    "clean": "rm -rf dist"
   },
   "keywords": [
     "dynamodb",
@@ -27,6 +29,10 @@
     "dotenv": "^16.3.1"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "typescript": "^5.2.2",
+    "ts-node": "^10.9.1",
+    "@types/node": "^20.8.0",
+    "@types/aws-sdk": "^2.7.0"
   }
 }
