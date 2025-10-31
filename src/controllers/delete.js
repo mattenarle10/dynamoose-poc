@@ -1,5 +1,5 @@
-const configure = require('./config');
-const UserService = require('./service');
+const configure = require('../config');
+const UserService = require('../service');
 
 configure();
 
