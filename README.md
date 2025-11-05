@@ -58,32 +58,6 @@ This project showcases three different approaches to working with DynamoDB:
 - `npm run setup` - Create the DynamoDB table
 - `npm run clean` - Clean the dist directory
 
-## Project Structure
-
-```
-dynamoose-poc/
-├── src/
-│   ├── config.ts        # DynamoDB configuration
-│   ├── model.ts         # User model (Dynamoose)
-│   ├── service.ts       # CRUD operations (Dynamoose)
-│   ├── index.ts         # Main entry point
-│   ├── setup.ts         # Setup script
-│   └── controllers/     # Example CRUD controllers
-│       ├── create.ts    # Create example
-│       ├── read.ts      # Read example
-│       ├── update.ts    # Update example
-│       └── delete.ts    # Delete example
-├── dist/                # Compiled JavaScript output
-│   ├── config.js
-│   ├── model.js
-│   ├── service.js
-│   ├── index.js
-│   └── controllers/
-├── .env.example
-├── package.json
-├── tsconfig.json        # TypeScript configuration
-└── README.md
-```
 
 ## Implementation Approaches
 
@@ -92,78 +66,6 @@ dynamoose-poc/
 **Type Safety**: Full TypeScript support with interfaces and type definitions
 **Development Speed**: High-level abstraction simplifies development
 **Features**: Built-in validation, schema enforcement, timestamps, and type conversion
-
-**Example Model Definition:**
-```typescript
-import * as dynamoose from 'dynamoose';
-
-export interface IUser {
-  userId: string;
-  email: string;
-  name: string;
-  age?: number;
-  status?: 'active' | 'inactive' | 'pending';
-  createdAt?: Date;
-  updatedAt?: Date;
-}
-
-const schema = new dynamoose.Schema({
-  userId: { type: String, hashKey: true, required: true },
-  email: { type: String, required: true, index: { name: 'EmailIndex', type: 'global' } },
-  name: { type: String, required: true },
-  age: { type: Number, required: false },
-  status: { type: String, enum: ['active', 'inactive', 'pending'], default: 'active' },
-}, { timestamps: true });
-
-export const User = dynamoose.model('Users', schema);
-```
-
-### 2. Raw AWS SDK (Planned)
-
-**Type Safety**: Manual TypeScript interface definitions
-**Performance**: Lower overhead, direct SDK calls
-**Control**: Complete control over DynamoDB operations
-**Learning Curve**: Requires deeper understanding of DynamoDB API
-
-*This implementation is planned for comparison purposes.*
-
-### 3. Performance Comparison (Planned)
-
-*Performance benchmarks will be added to compare:*
-- **Latency**: Request/response times for CRUD operations
-- **Memory Usage**: Runtime memory consumption
-- **Bundle Size**: JavaScript bundle size impact
-- **Development Velocity**: Lines of code and development time
-
-## CRUD Operations (Dynamoose)
-
-### Create
-```typescript
-const user = await UserService.create({
-  userId: '123',
-  email: 'user@example.com',
-  name: 'John Doe'
-});
-```
-
-### Read
-```typescript
-const user = await UserService.getById('123');
-const allUsers = await UserService.getAll();
-const usersByEmail = await UserService.getByEmail('user@example.com');
-```
-
-### Update
-```typescript
-const updated = await UserService.update('123', {
-  name: 'Jane Doe'
-});
-```
-
-### Delete
-```typescript
-await UserService.delete('123');
-```
 
 ## Key Differences & Considerations
 
